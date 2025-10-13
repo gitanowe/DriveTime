@@ -1,0 +1,52 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+actor "Администратор" as Admin
+actor "Клиент" as User
+
+rectangle "Система DriveTime" {
+
+  ' ===== Use Cases для Клиента =====
+  usecase "Просмотр списка автомобилей в наличии" as UC_ViewCars
+  usecase "Оформить заявку на аренду" as UC_Request
+  usecase "Ввести данные заявки\n(дата, время, срок аренды)" as UC_InputData
+  usecase "Просмотр своих заявок и их статусов" as UC_ViewRequests
+  usecase "Отмена заявки\n(до подтверждения администратором)" as UC_CancelRequest
+
+  ' ===== Use Cases для Администратора =====
+  usecase "Операции с автомобилями в БД" as UC_CarOperations
+  usecase "Добавление автомобиля" as UC_AddCar
+  usecase "Удаление автомобиля" as UC_RemoveCar
+  usecase "Обработка списка заявок клиентов" as UC_ProcessRequests
+  usecase "Принять заявку" as UC_AcceptRequest
+  usecase "Отклонить заявку" as UC_RejectRequest
+  usecase "Отметить состояние заказа" as UC_OrderStatus
+  usecase "Отметить выдачу автомобиля" as UC_GiveCar
+  usecase "Отметить возврат автомобиля" as UC_ReturnCar
+}
+
+' ===== Связи Клиента =====
+User --> UC_ViewCars
+User --> UC_Request
+User --> UC_ViewRequests
+User --> UC_CancelRequest
+
+UC_Request --> UC_InputData : <<include>>
+
+' ===== Связи Администратора =====
+Admin --> UC_CarOperations
+Admin --> UC_ProcessRequests
+Admin --> UC_OrderStatus
+
+UC_CarOperations --> UC_AddCar : <<include>>
+UC_CarOperations --> UC_RemoveCar : <<include>>
+
+UC_ProcessRequests --> UC_AcceptRequest : <<include>>
+UC_ProcessRequests --> UC_RejectRequest : <<include>>
+
+UC_OrderStatus --> UC_GiveCar : <<include>>
+UC_OrderStatus --> UC_ReturnCar : <<include>>
+
+@enduml
