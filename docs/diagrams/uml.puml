@@ -36,13 +36,13 @@ Admin --> UC_CarOperations
 Admin --> UC_ProcessRequests
 Admin --> UC_OrderStatus
 
-UC_CarOperations --> UC_AddCar : <<include>>
-UC_CarOperations --> UC_RemoveCar : <<include>>
+UC_CarOperations --> UC_AddCar
+UC_CarOperations --> UC_RemoveCar
 
-UC_ProcessRequests --> UC_AcceptRequest : <<include>>
-UC_ProcessRequests --> UC_RejectRequest : <<include>>
+UC_ProcessRequests --> UC_AcceptRequest
+UC_ProcessRequests --> UC_RejectRequest
 
-UC_OrderStatus --> UC_GiveCar : <<include>>
-UC_OrderStatus --> UC_ReturnCar : <<include>>
+UC_OrderStatus --> UC_GiveCar
+UC_OrderStatus --> UC_ReturnCar
 
 @enduml
