@@ -1,0 +1,90 @@
+@startuml
+' ========================================================
+' ER-диаграмма базы данных DriveTime
+' Автор: студент, проект DriveTime (на основе репозитория gitanowe)
+' ========================================================
+
+!theme plain
+hide circle
+skinparam linetype ortho
+skinparam entity {
+  BackgroundColor White
+  BorderColor Black
+  FontName "Consolas"
+}
+
+entity "Car" as Car {
+  *id : INTEGER <<PK>>
+  --
+  brand : TEXT
+  model : TEXT
+  year : INTEGER
+  price_per_day : INT
+  status : TEXT
+}
+
+entity "Customer" as Customer {
+  *id : INTEGER <<PK>>
+  --
+  name : TEXT
+  phone : TEXT
+  email : TEXT
+}
+
+entity "Admin" as Admin {
+  *id : INTEGER <<PK>>
+  --
+  username : TEXT
+  password : TEXT
+  role : TEXT
+}
+
+entity "Rental" as Rental {
+  *id : INTEGER <<PK>>
+  --
+  car_id : INTEGER <<FK>>
+  customer_id : INTEGER <<FK>>
+  admin_id : INTEGER <<FK>>
+  start_date : TEXT
+  end_date : TEXT
+  status : TEXT
+  total_price : INT
+}
+
+entity "Payment" as Payment {
+  *id : INTEGER <<PK>>
+  --
+  rental_id : INTEGER <<FK>>
+  amount : INT
+  payment_date : TEXT
+}
+
+entity "Maintenance" as Maintenance {
+  *id : INTEGER <<PK>>
+  --
+  car_id : INTEGER <<FK>>
+  service_date : TEXT
+  description : TEXT
+  cost : INT
+}
+
+' ========================================================
+' СВЯЗИ (1:N и M:N)
+' ========================================================
+
+' 1:N — Клиент может иметь несколько аренд
+Customer ||--o{ Rental
+
+' 1:N — Машина может участвовать в нескольких арендах
+Car ||--o{ Rental
+
+' 1:N — Администратор может подтверждать несколько аренд
+Admin ||--o{ Rental
+
+' 1:1 — Каждая аренда имеет один платёж
+Rental ||--|| Payment
+
+' 1:N — Одна машина может иметь несколько записей обслуживания
+Car ||--o{ Maintenance
+
+@enduml

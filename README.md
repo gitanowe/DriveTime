@@ -86,3 +86,8 @@
 ![Flowchart: создание, подтверждение и возврат](docs/diagrams/flowchart.png)
 
 ---
+## Диаграмма Er
+
+![Er Диаграмма DriveTime](docs/diagrams/er.png)
+
+---
