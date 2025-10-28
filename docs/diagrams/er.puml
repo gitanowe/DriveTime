@@ -10,45 +10,45 @@ skinparam entity {
 }
 
 entity "Car" as Car {
-  *id : INTEGER <<PK>>
+  *car_id : INTEGER <<PK>>
   --
   brand : TEXT
   model : TEXT
   year : INTEGER
   price_per_day : INT
-  status : TEXT
+  is_busy : BOOLEAN
 }
 
 entity "Customer" as Customer {
-  *id : INTEGER <<PK>>
+  *customer_id : INTEGER <<PK>>
   --
-  name : TEXT
+  username : TEXT
+  password : TEXT
   phone : TEXT
   email : TEXT
 }
 
 entity "Admin" as Admin {
-  *id : INTEGER <<PK>>
+  *admin_id : INTEGER <<PK>>
   --
   username : TEXT
   password : TEXT
-  role : TEXT
 }
 
 entity "Rental" as Rental {
-  *id : INTEGER <<PK>>
+  *rental_id : INTEGER <<PK>>
   --
   car_id : INTEGER <<FK>>
   customer_id : INTEGER <<FK>>
   admin_id : INTEGER <<FK>>
   start_date : TEXT
   end_date : TEXT
-  status : TEXT
+  application_status : TEXT
   total_price : INT
 }
 
 entity "Payment" as Payment {
-  *id : INTEGER <<PK>>
+  *payment_id : INTEGER <<PK>>
   --
   rental_id : INTEGER <<FK>>
   amount : INT
