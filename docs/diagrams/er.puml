@@ -15,8 +15,8 @@ entity "Car" as Car {
   brand : TEXT
   model : TEXT
   year : INTEGER
-  price_per_day : INT
-  is_busy : BOOLEAN
+  price_per_day : REAL
+  is_busy : INTEGER <<default 0>>
 }
 
 entity "Customer" as Customer {
@@ -24,8 +24,11 @@ entity "Customer" as Customer {
   --
   username : TEXT
   password : TEXT
+  full_name : TEXT
   phone : TEXT
   email : TEXT
+  passport : TEXT
+  driver_license : TEXT
 }
 
 entity "Admin" as Admin {
@@ -41,27 +44,29 @@ entity "Rental" as Rental {
   car_id : INTEGER <<FK>>
   customer_id : INTEGER <<FK>>
   admin_id : INTEGER <<FK>>
-  start_date : TEXT
-  end_date : TEXT
-  application_status : TEXT
-  total_price : INT
+  start_date : DATE
+  end_date : DATE
+  status : TEXT
+  total_price : REAL
 }
 
 entity "Payment" as Payment {
   *payment_id : INTEGER <<PK>>
   --
   rental_id : INTEGER <<FK>>
-  amount : INT
-  payment_date : TEXT
+  amount : REAL
+  payment_date : DATE
 }
 
 entity "Maintenance" as Maintenance {
   *id : INTEGER <<PK>>
   --
   car_id : INTEGER <<FK>>
-  service_date : TEXT
+  service_date : DATE
   description : TEXT
-  cost : INT
+  cost : REAL
+  rental_id : INTEGER <<FK>>
+  is_paid : INTEGER <<default 0>>
 }
 
 ' СВЯЗИ (1:N и M:N)
@@ -75,10 +80,13 @@ Car ||--o{ Rental
 ' 1:N — Администратор может подтверждать несколько аренд
 Admin ||--o{ Rental
 
-' 1:1 — Каждая аренда имеет один платёж
-Rental ||--|| Payment
+' 1:N — Каждая аренда может иметь несколько платежей (обновлено для consistency с кодом, где платежи могут быть множественными, e.g. штрафы)
+Rental ||--o{ Payment
 
 ' 1:N — Одна машина может иметь несколько записей обслуживания
 Car ||--o{ Maintenance
+
+' 1:N — Аренда может иметь несколько записей обслуживания (штрафы/повреждения)
+Rental ||--o{ Maintenance
 
 @enduml
