@@ -123,11 +123,12 @@ def insert_sample_data(conn):
     c.execute("SELECT COUNT(*) FROM Car")
     if c.fetchone()[0] == 0:
         cars = [
-            ('Toyota', 'Camry', 2020, 100.0),
-            ('Ford', 'Focus', 2018, 80.0),
-            ('BMW', 'X5', 2022, 200.0),
-            ('Audi', 'A4', 2019, 150.0),
-            ('Volkswagen', 'Golf', 2021, 90.0)
+            ('Porshe', '911', 2023, 8500.0),
+            ('Toyota', 'Camry', 2020, 4000.0),
+            ('Ford', 'Focus', 2018, 3200.0),
+            ('BMW', 'X6 m', 2024, 5000.0),
+            ('Audi', 'A4', 2023, 4000.0),
+            ('Volkswagen', 'Golf', 2021, 2800.0)
         ]
         for car in cars:
             c.execute("INSERT INTO Car (brand, model, year, price_per_day) VALUES (?, ?, ?, ?)", car)
