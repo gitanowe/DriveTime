@@ -128,7 +128,7 @@ def insert_sample_data(conn):
             ('Ford', 'Focus', 2018, 3200.0),
             ('BMW', 'X6 m', 2024, 5000.0),
             ('Audi', 'A4', 2023, 4000.0),
-            ('Volkswagen', 'Golf', 2021, 2800.0)
+            ('Volkswagen', 'Golf', 2021, 2800.0),
         ]
         for car in cars:
             c.execute("INSERT INTO Car (brand, model, year, price_per_day) VALUES (?, ?, ?, ?)", car)
