@@ -194,7 +194,7 @@ def register_customer(conn):
         if not full_name or full_name.count(' ') != 2:
             raise Exception("Невеврный формат ввода", full_name.count(' '))
         phone = input("Введите телефон: ").strip()
-        if not phone or all(x in phone for x in "+1234567890"):
+        if not phone or all(x not in phone for x in "+1234567890"):
             raise Exception("Невеврный формат ввода")
         email = input("Введите email: ").strip()
         if not email or '@' not in email:
