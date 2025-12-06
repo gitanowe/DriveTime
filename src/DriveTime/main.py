@@ -225,7 +225,7 @@ def register_customer(conn):
     except Exception as e:
         clear_screen()
         print(LOGO)
-        print("Введите корректные данные!")
+        print(e)
         time.sleep(1)
 
 
