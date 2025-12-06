@@ -190,15 +190,15 @@ def register_customer(conn):
         password = input("Введите пароль: ").strip()
         if not password:
             raise Exception("Поле не может быть пустым")
-        full_name = input("Введите ФИО: ").strip()
-        if not full_name:
-            raise Exception("Поле не может быть пустым")
+        full_name = input("Введите ФИО (через пробел): ").strip()
+        if not full_name or full_name.count(' ') != 3:
+            raise Exception("Невеврный формат ввода")
         phone = input("Введите телефон: ").strip()
-        if not phone:
-            raise Exception("Поле не может быть пустым")
+        if not phone or all(x in phone for x in "+1234567890"):
+            raise Exception("Невеврный формат ввода")
         email = input("Введите email: ").strip()
-        if not email:
-            raise Exception("Поле не может быть пустым")
+        if not email or '@' not in email:
+            raise Exception("Невеврный формат ввода")
         passport = input("Введите паспорт (0000-00000): ").strip()
         if not passport:
             raise Exception("Поле не может быть пустым")
